@@ -1,0 +1,12 @@
+# 更新依赖
+yarn install
+# 打包项目
+yarn run vitepress build
+
+if [ $? -ne 0 ]; then
+    echo "打包失败，已拦截提交"
+    exit 1
+fi
+# 清理NodeModules
+rm -rf node_modules
+git add .

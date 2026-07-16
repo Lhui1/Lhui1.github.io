@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "typescript": "^7.0.2",
+    "vitepress": "^2.0.0-alpha.17",
+    "vue": "^3.5.13"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview",
+    "prepare": "husky"
+  }
+}

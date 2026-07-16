@@ -1,0 +1,91 @@
+name: Deploy site
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # 拉取仓库代码，确保后续能判断哪些文件发生了变化
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      # 从配置文件读取实际输出目录，避免在 YAML 里重复写一遍路径
+      - name: 解析构建输出目录
+        id: config
+        run: |
+          BUILD_DIR=$(node - <<'EOF'
+          const fs = require('fs')
+          const configPath = '.vitepress/config.mts'
+          const config = fs.readFileSync(configPath, 'utf8')
+          const cleaned = config.replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '')
+          const match = cleaned.match(/outDir\s*:\s*['"]([^'"]+)['"]/)
+          const resolved = match ? match[1] : '.vitepress/dist'
+          console.log(resolved)
+          EOF
+          )
+          echo "build_dir=$BUILD_DIR" >> "$GITHUB_OUTPUT"
+          echo "解析到的输出目录：$BUILD_DIR"
+
+      # 如果配置文件指定的输出目录有变化，就说明提交里已经包含了构建结果
+      # 这时不用再云端重新构建，直接用现成目录部署
+      - name: 检查构建目录是否有变化
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            build:
+              - '${{ steps.config.outputs.build_dir }}/**'
+
+      # 只有当输出目录没有变化时，才在云端执行构建流程
+      # 这里使用 Yarn 的方式来安装依赖和构建站点
+      - name: 设置 Node.js
+        if: steps.changes.outputs.build != 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+          cache-dependency-path: yarn.lock
+
+      - name: 启用 Corepack
+        if: steps.changes.outputs.build != 'true'
+        run: corepack enable
+
+      - name: 安装依赖
+        if: steps.changes.outputs.build != 'true'
+        run: yarn install --mode=skip-build
+
+      - name: 构建站点
+        if: steps.changes.outputs.build != 'true'
+        run: yarn run vitepress build
+
+      # 无论是直接使用配置文件指定的目录，还是云端重新构建，最终都要部署同一个静态目录
+      - name: 设置 Pages
+        uses: actions/configure-pages@v5
+
+      - name: 上传 Pages 构建产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.config.outputs.build_dir }}
+
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
