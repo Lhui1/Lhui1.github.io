@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import { generateSidebar, watchDocsPlugin } from './generateSidebar.mjs'
 const staticSidebar = [
   {
-    text: '导航',
+    text: '你想？',
     items: [
       { text: '首页', link: '/index.md' },
       { text: '文档', link: '/Docs/index.md' },
