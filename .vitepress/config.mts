@@ -52,7 +52,7 @@ const config = defineConfig({
     },
     editLink: {
       pattern: 'https://github.com/Lhui1/Lhui1.github.io/edit/main/Docs/:path',
-      text: '编辑此页'
+      text: '编辑此文章'
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Lhui1/Lhui1.github.io' }
