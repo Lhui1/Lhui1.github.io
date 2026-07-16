@@ -5,7 +5,7 @@ layout: home
 
 hero:
   name: "Lhui's WebSite"
-  text: "所以到底为什么意大利面要拌42号混凝土！"
+  text: ""
   tagline: "<p><a href='https://github.com/TheOninesixY'>由OninesixY提供技术支持</p>"
   actions:
     - theme: brand
