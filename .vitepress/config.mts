@@ -6,7 +6,7 @@ const staticSidebar = [
     items: [
       { text: '首页', link: '/index.md' },
       { text: '文档', link: '/Docs/index.md' },
-      //{ text: '新建', link: '/Docs/index.md' }
+      { text: '新建', link: 'https://github.com/Lhui1/Lhui1.github.io/new/main/Docs' }
     ]
   }
 ]
