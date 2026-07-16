@@ -5,7 +5,8 @@ const staticSidebar = [
     text: '导航',
     items: [
       { text: '首页', link: '/index.md' },
-      { text: '文档', link: '/Docs/index.md' }
+      { text: '文档', link: '/Docs/index.md' },
+      //{ text: '新建', link: '/Docs/index.md' }
     ]
   }
 ]
@@ -19,7 +20,7 @@ const config = defineConfig({
   lastUpdated: true,          //    开启时间戳       \
   
   head: [
-    ['link', { rel: 'icon', href: '/minecraft_axolotl-cyan.ico', type: 'image/x-icon'}]
+    ['link', { rel: 'icon', href: '/logo.png', type: 'image/png'}]
   ],
 
   vite: {
@@ -49,7 +50,13 @@ const config = defineConfig({
         hour12: true
       }
     },
-
+    editLink: {
+      pattern: 'https://github.com/Lhui1/Lhui1.github.io/edit/main/Docs/:path',
+      text: '编辑此页'
+    },
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/Lhui1/Lhui1.github.io' }
+    ]
   }
 })
 
