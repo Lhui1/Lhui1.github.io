@@ -37,7 +37,7 @@ sudo apt install nodejs
 ```sh
 sudo npm install -g corepack
 sudo corepack enable
-sudo corepack prepare yarn@stable --activate
+corepack prepare yarn@stable --activate
 ```
 
 然后，运行`yarn -v`，如果输出版本号为1开头，则装错了版本，如果是4开头，则装对了版本，但如果啥都不输出还报错了，那就是没装好
