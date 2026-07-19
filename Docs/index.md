@@ -12,14 +12,14 @@ hero:
       text: "查看文档"
       link: Docs
     - theme: alt
-      text: "附加按钮（未设置按下目标）"
-      # link: <在这里填写你要去的地方>
+      text: "GitHub"
+      link: https://github.com/Lhui1/Lhui1.github.io
 
 features:
   - icon: "😶‍🌫️"
     title: "这是一个公告块"
     details: "你能在这里填写你想表达的内容<br>温馨提示：使用&lt;br&gt;进行换行"
-  - icon: "😶"
-    title: "标题"
-    details: "滚滚长江东逝水"
+  - icon: "👋"
+    title: "Hello"
+    details: "这是正文"
 ---
