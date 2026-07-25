@@ -16,15 +16,15 @@
 
 ### Linux 初始化项目
 
-#### 首先安装 NodeJS 
+#### 首先安装 NodeJS 和 Git 
 ::: code-group
 
 ```sh [Fedora]
-sudo dnf install nodejs
+sudo dnf install nodejs git -y
 ```
 
 ```sh [Debian]
-sudo apt install nodejs
+sudo apt install nodejs git -y
 ```
 :::
 
@@ -44,9 +44,9 @@ corepack prepare yarn@stable --activate
 
 #### Windows 初始化项目
 
-打开管理员PowerShell，运行：
+打开**管理员**PowerShell来安装所需的Node.js和Git运行：
 ```powershell
-winget install nodejs
+winget install nodejs git.git
 ```
 然后重新开启PowerShell，运行：
 ```powershell
@@ -78,6 +78,11 @@ yarn docs:build
 这样dist就会更新为最新的
 
 但我其实并不推荐你这样，因为该仓库配置了husky，会在提交时自动编译，而手动编译可能会和husky冲突，因此更推荐的做法是直接提交代码，让husky进行编译（如果husky炸了，请确保你`yarn install`过了，如果还不行那就手动编译吧）
+
+## 问题排查
+
+> ？ 无法运行`yarn run docs:dev`
+> > 先试下安装Git
 
 ## 更新
 
