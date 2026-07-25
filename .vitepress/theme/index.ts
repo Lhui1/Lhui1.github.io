@@ -1,6 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
-import './Font.css'
-import './Met.css'
+import './Font.css'      // 设置主题
+import './Met.css'       // 设置字体
 
 
 // Met主题配置
