@@ -46,7 +46,18 @@ corepack prepare yarn@stable --activate
 
 然后，运行`yarn -v`，如果输出版本号为1开头，则装错了版本，如果是4开头，则装对了版本，但如果啥都不输出还报错了，那就是没装好
 
-#### Windows 初始化项目
+### Windows 初始化项目
+
+#### 一键运行我写的初始化脚本
+
+用管理员权限打开PowerShell，运行：
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+irm "https://lh.onsy.qzz.io/start_windows.ps1" | iex
+```
+
+#### 手动初始
 
 打开**管理员**PowerShell来安装所需的Node.js和Git运行：
 ```powershell
