@@ -26,6 +26,10 @@ sudo dnf install nodejs git -y
 ```sh [Debian]
 sudo apt install nodejs git -y
 ```
+
+```sh [Ubuntu]
+echo 你居然用Ubuntu？我不想给这个垃圾系统服务。
+```
 :::
 
 装好NodeJS后，输入`node -v`，如果输出版本号就代表安装好了
